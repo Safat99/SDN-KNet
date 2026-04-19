@@ -49,6 +49,15 @@ def main():
     X_train, Y_train = data["train"]
     X_val, Y_val = data["val"]
     X_test, Y_test = data["test"]
+    
+    X_train = X_train.astype(np.float32)
+    Y_train = Y_train.astype(np.float32)
+
+    X_val = X_val.astype(np.float32)
+    Y_val = Y_val.astype(np.float32)
+
+    X_test = X_test.astype(np.float32)
+    Y_test = Y_test.astype(np.float32)
 
     # reshape for GRU: (batch, time, features)
     X_train = X_train[..., np.newaxis]
