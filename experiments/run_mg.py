@@ -6,6 +6,9 @@ from data.pipeline import TimeSeriesPipeline
 from models.gru_baseline import GRUBaseline
 from training.trainer import Trainer
 
+from analysis.saver import ResultSaver
+from analysis.plots import Plotter
+from training.metrics import rmse, mae
 
 def main():
     # Load config
@@ -40,11 +43,33 @@ def main():
         (X_train, Y_train),
         (X_val, Y_val)
     )
+    
+    # --- Predictions ---
+    preds = model(X_test).numpy()
+    
+    # --- Metrics ---
+    test_rmse = rmse(Y_test, preds).numpy()
+    test_mae = mae(Y_test, preds).numpy()
+    
+    metrics = {
+    "rmse": float(test_rmse),
+    "mae": float(test_mae)
+    }
 
-    # Test evaluation
-    preds = model(X_test)
-    mse = tf.reduce_mean(tf.square(Y_test - preds))
-    print("Test MSE:", mse.numpy())
+    print("Test RMSE:", test_rmse)
+    print("Test MAE:", test_mae)
+    
+    saver = ResultSaver()
+
+    saver.save_history(trainer.history, "gru_mg")
+    saver.save_predictions(Y_test, preds, "gru_mg")
+    saver.save_metrics(metrics, "gru_mg")
+    
+    # --- plot --- 
+    plotter = Plotter()
+
+    plotter.plot_training(trainer.history, name="gru_mg")
+    plotter.plot_predictions(Y_test, preds, name="gru_mg")
 
 
 if __name__ == "__main__":

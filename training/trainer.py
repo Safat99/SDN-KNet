@@ -11,6 +11,11 @@ class Trainer:
         )
 
         self.loss_fn = tf.keras.losses.MeanSquaredError()
+        
+        self.history = {
+            "train_loss": [],
+            "val_loss": []
+        }
 
     @tf.function
     def train_step(self, x, y):
@@ -53,9 +58,13 @@ class Trainer:
             for x_batch, y_batch in val_dataset:
                 loss = self.val_step(x_batch, y_batch)
                 val_losses.append(loss)
+            
+            train_loss = tf.reduce_mean(train_losses).numpy()
+            val_loss = tf.reduce_mean(val_losses).numpy()
+            
+            # save history
+            self.history["train_loss"].append(train_loss)
+            self.history["val_loss"].append(val_loss)
+   
 
-            print(
-                f"Epoch {epoch+1}: "
-                f"Train Loss={tf.reduce_mean(train_losses):.4f}, "
-                f"Val Loss={tf.reduce_mean(val_losses):.4f}"
-            )
+            print(f"Epoch {epoch+1}: Train={train_loss:.4f}, Val={val_loss:.4f}")
