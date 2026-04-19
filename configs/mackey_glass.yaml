@@ -1,0 +1,28 @@
+dataset:
+  name: mackey_glass
+  sequence_length: 10000
+  tau: 17              # delay inside MG system
+  delta_t: 1
+
+corruption:
+  delay: 5             # observation delay d
+  noise_std: 0.1       # sigma
+
+window:
+  input_length: 20
+  forecast_horizon: 1
+
+model:
+  type: GRU
+  hidden_size: 64
+  num_layers: 1
+
+training:
+  batch_size: 32
+  epochs: 20
+  learning_rate: 0.001
+
+split:
+  train: 0.7
+  val: 0.15
+  test: 0.15
