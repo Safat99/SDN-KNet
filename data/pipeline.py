@@ -92,4 +92,4 @@ class TimeSeriesPipeline:
         # split
         data = self.split(X, Y)
 
-        return data, (mean, std)
+        return data, (mean, std), x_norm, y_norm

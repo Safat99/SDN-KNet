@@ -29,8 +29,8 @@ class Plotter:
     def plot_predictions(self, y_true, y_pred, name="pred", num_points=200, show=False):
         plt.figure(figsize=(10, 4))
 
-        plt.plot(y_true[:num_points], label="True")
-        plt.plot(y_pred[:num_points], label="Predicted")
+        plt.plot(y_true[:num_points].squeeze(), label="True")
+        plt.plot(y_pred[:num_points].squeeze(), label="Predicted")
 
         plt.title("Prediction vs Ground Truth")
         plt.legend()
@@ -41,4 +41,24 @@ class Plotter:
         if show:
             plt.show()
 
+        plt.close()
+
+    def plot_full_comparison(self, x_true, y_obs, y_pred, name="full", num_points=200, show=False):
+        
+        plt.figure(figsize=(10, 4))
+
+        plt.plot(x_true[:num_points].squeeze(), label="Clean (x)")
+        plt.plot(y_obs[:num_points].squeeze(), label="Corrupted (y)", alpha=0.7)
+        plt.plot(y_pred[:num_points].squeeze(), label="Predicted (x̂)")
+
+        plt.legend()
+        plt.title("Clean vs Corrupted vs Prediction")
+
+        save_path = os.path.join(self.base_dir, f"{name}_full.png")
+        plt.savefig(save_path, dpi=300, bbox_inches="tight")
+        
+        if show:
+            plt.show()
+
+        
         plt.close()
