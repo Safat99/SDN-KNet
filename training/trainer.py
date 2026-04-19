@@ -67,4 +67,4 @@ class Trainer:
             self.history["val_loss"].append(val_loss)
    
 
-            print(f"Epoch {epoch+1}: Train={train_loss:.4f}, Val={val_loss:.4f}")
+            print(f"Epoch {epoch+1}/{epochs} | Train={train_loss:.4f} | Val={val_loss:.4f}", flush=True)

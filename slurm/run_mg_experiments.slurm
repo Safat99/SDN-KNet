@@ -4,11 +4,11 @@
 #SBATCH --partition=priority
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=4
+#SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
 #SBATCH --time=01:00:00
 
-#SBATCH --array=0-59%20
+#SBATCH --array=0-59%10
 #SBATCH --output=slurm_logs/mg/%x-%A_%a.out
 #SBATCH --error=slurm_logs/mg/%x-%A_%a.err
 
@@ -16,11 +16,12 @@ echo "===== MG GRU Experiment Started ====="
 
 # ---------------- ENV ----------------
 module load CUDA/12.2.0
-module load Anaconda3/2024.02-1
+# module load Anaconda3/2024.02-1
 source ~/.bashrc
 conda activate sdn_knet_env
 
 export PYTHONPATH="$SLURM_SUBMIT_DIR"
+export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
 mkdir -p slurm_logs/mg
 
 echo "Node: $(hostname)"
