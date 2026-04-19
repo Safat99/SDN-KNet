@@ -7,25 +7,60 @@ class Plotter:
         self.base_dir = base_dir
         os.makedirs(self.base_dir, exist_ok=True)
 
+    # ---------------- TRAINING CURVES ----------------
     def plot_training(self, history, name="training", show=False):
-        plt.figure()
 
-        plt.plot(history["train_loss"], label="Train Loss")
-        plt.plot(history["val_loss"], label="Val Loss")
+        # ---- LOSS (MSE) ----
+        plt.figure()
+        plt.plot(history["train_loss"], label="Train MSE")
+        plt.plot(history["val_loss"], label="Val MSE")
 
         plt.xlabel("Epoch")
-        plt.ylabel("Loss")
-        plt.title("Training Curve")
+        plt.ylabel("MSE Loss")
+        plt.title("Training Curve (MSE)")
         plt.legend()
 
         save_path = os.path.join(self.base_dir, f"{name}_loss.png")
         plt.savefig(save_path, dpi=300, bbox_inches="tight")
-
         if show:
             plt.show()
-
         plt.close()
 
+        # ---- RMSE ----
+        if "train_rmse" in history and "val_rmse" in history:
+            plt.figure()
+            plt.plot(history["train_rmse"], label="Train RMSE")
+            plt.plot(history["val_rmse"], label="Val RMSE")
+
+            plt.xlabel("Epoch")
+            plt.ylabel("RMSE")
+            plt.title("Training Curve (RMSE)")
+            plt.legend()
+
+            save_path = os.path.join(self.base_dir, f"{name}_rmse.png")
+            plt.savefig(save_path, dpi=300, bbox_inches="tight")
+            if show:
+                plt.show()
+            plt.close()
+
+        # ---- MAE ----
+        if "train_mae" in history and "val_mae" in history:
+            plt.figure()
+            plt.plot(history["train_mae"], label="Train MAE")
+            plt.plot(history["val_mae"], label="Val MAE")
+
+            plt.xlabel("Epoch")
+            plt.ylabel("MAE")
+            plt.title("Training Curve (MAE)")
+            plt.legend()
+
+            save_path = os.path.join(self.base_dir, f"{name}_mae.png")
+            plt.savefig(save_path, dpi=300, bbox_inches="tight")
+            if show:
+                plt.show()
+            plt.close()
+
+    # ---------------- PREDICTIONS ----------------
     def plot_predictions(self, y_true, y_pred, name="pred", num_points=200, show=False):
         plt.figure(figsize=(10, 4))
 
@@ -43,6 +78,7 @@ class Plotter:
 
         plt.close()
 
+    # ---------------- FULL COMPARISON ----------------
     def plot_full_comparison(self, x_true, y_obs, y_pred, name="full", num_points=200, show=False):
         
         plt.figure(figsize=(10, 4))
@@ -60,5 +96,4 @@ class Plotter:
         if show:
             plt.show()
 
-        
         plt.close()
