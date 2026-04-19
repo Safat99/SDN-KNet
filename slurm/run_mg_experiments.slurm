@@ -16,9 +16,9 @@ echo "===== MG GRU Experiment Started ====="
 
 # ---------------- ENV ----------------
 module load CUDA/12.2.0
-# module load Anaconda3/2024.02-1
+module load Anaconda3/2024.02-1
 source ~/.bashrc
-conda activate sdn_knet_env
+conda activate sdn_tf
 
 export PYTHONPATH="$SLURM_SUBMIT_DIR"
 export LD_LIBRARY_PATH=$CONDA_PREFIX/lib:$LD_LIBRARY_PATH
