@@ -61,16 +61,16 @@ class Plotter:
             plt.close()
 
     # ---------------- PREDICTIONS ----------------
-    def plot_predictions(self, y_true, y_pred, name="pred", num_points=200, show=False):
+    def plot_predictions(self, x_true, x_hat, name="pred", num_points=200, show=False):
         plt.figure(figsize=(10, 4))
 
-        plt.plot(y_true[:num_points].squeeze(), label="True")
-        plt.plot(y_pred[:num_points].squeeze(), label="Predicted")
+        plt.plot(x_true[:num_points].squeeze(), label="True")
+        plt.plot(x_hat[:num_points].squeeze(), label="Estimated")
 
-        plt.title("Prediction vs Ground Truth")
+        plt.title("State Estimation vs Ground Truth")
         plt.legend()
 
-        save_path = os.path.join(self.base_dir, f"{name}_prediction.png")
+        save_path = os.path.join(self.base_dir, f"{name}_estimation.png")
         plt.savefig(save_path, dpi=300, bbox_inches="tight")
 
         if show:
@@ -79,16 +79,16 @@ class Plotter:
         plt.close()
 
     # ---------------- FULL COMPARISON ----------------
-    def plot_full_comparison(self, x_true, y_obs, y_pred, name="full", num_points=200, show=False):
+    def plot_full_comparison(self, x_true, y_obs, x_hat, name="full", num_points=200, show=False):
         
         plt.figure(figsize=(10, 4))
 
         plt.plot(x_true[:num_points].squeeze(), label="Clean (x)")
         plt.plot(y_obs[:num_points].squeeze(), label="Corrupted (y)", alpha=0.7)
-        plt.plot(y_pred[:num_points].squeeze(), label="Predicted (x̂)")
+        plt.plot(x_hat[:num_points].squeeze(), label="Estimated (x̂)")
 
         plt.legend()
-        plt.title("Clean vs Corrupted vs Prediction")
+        plt.title("Clean vs Corrupted vs Estimated")
 
         save_path = os.path.join(self.base_dir, f"{name}_full.png")
         plt.savefig(save_path, dpi=300, bbox_inches="tight")

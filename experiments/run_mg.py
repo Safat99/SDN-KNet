@@ -75,7 +75,7 @@ def main():
     trainer = Trainer(model, config)
     trainer.train((X_train, Y_train), (X_val, Y_val))
 
-    # ---------------- TEST PREDICTIONS ----------------
+    # ---------------- TEST PREDICTIONS (Predicting the state, not forecast)----------------
     preds = model(X_test, training=False).numpy()
 
     # ensure consistent shapes
@@ -105,7 +105,7 @@ def main():
 
     saver = ResultSaver()
     saver.save_history(trainer.history, exp_name)
-    saver.save_predictions(Y_test, preds, exp_name)
+    saver.save_predictions(x_true=Y_test, x_hat=preds, y_input=y_norm[-len(preds):], name=exp_name)
     saver.save_metrics(metrics, exp_name)
 
     # ---------------- PLOTTING ----------------

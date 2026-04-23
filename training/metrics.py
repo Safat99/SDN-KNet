@@ -1,9 +1,9 @@
 import tensorflow as tf
 
 
-def rmse(y_true, y_pred):
-    return tf.sqrt(tf.reduce_mean(tf.square(y_true - y_pred)))
+def rmse(x_true, x_hat):
+    return tf.sqrt(tf.reduce_mean(tf.square(x_true - x_hat)))
 
 
-def mae(y_true, y_pred):
-    return tf.reduce_mean(tf.abs(y_true - y_pred))
+def mae(x_true, x_hat):
+    return tf.reduce_mean(tf.abs(x_true - x_hat))

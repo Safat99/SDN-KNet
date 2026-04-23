@@ -14,10 +14,10 @@ class ResultSaver:
         with open(path, "w") as f:
             json.dump(history, f)
 
-    def save_predictions(self, y_true, y_pred, name):
-        path = os.path.join(self.base_dir, f"{name}_predictions.npz")
+    def save_predictions(self, x_true, x_hat, y_input, name):
+        path = os.path.join(self.base_dir, f"{name}_estimations.npz")
 
-        np.savez(path, y_true=y_true, y_pred=y_pred)
+        np.savez(path, x_true=x_true, x_hat=x_hat, y_input = y_input)
 
     def save_metrics(self, metrics_dict, name):
         path = os.path.join(self.base_dir, f"{name}_metrics.json")
