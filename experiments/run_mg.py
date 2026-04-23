@@ -68,14 +68,17 @@ def main():
     model = GRUBaseline(
         hidden_size=config["model"]["hidden_size"],
         num_layers=config["model"]["num_layers"],
-        output_dim=config["window"]["forecast_horizon"]
+        # output_dim=config["window"]["forecast_horizon"]
+        output_dim=1
+        
     )
 
+    # TODO: Need to implement Optuna or Grid based hyperparameter tuning
     # ---------------- TRAIN ----------------
     trainer = Trainer(model, config)
     trainer.train((X_train, Y_train), (X_val, Y_val))
 
-    # ---------------- TEST PREDICTIONS (Predicting the state, not forecast)----------------
+    # ---------------- TEST Estimation (Predicting the state, not forecast)----------------
     preds = model(X_test, training=False).numpy()
 
     # ensure consistent shapes
@@ -105,7 +108,7 @@ def main():
 
     saver = ResultSaver()
     saver.save_history(trainer.history, exp_name)
-    saver.save_predictions(x_true=Y_test, x_hat=preds, y_input=y_norm[-len(preds):], name=exp_name)
+    saver.save_predictions(x_true=Y_test, x_hat=preds, y_observed=y_norm[-len(preds):], name=exp_name)
     saver.save_metrics(metrics, exp_name)
 
     # ---------------- PLOTTING ----------------
@@ -119,7 +122,8 @@ def main():
         x_norm[-len(preds):],
         y_norm[-len(preds):],
         preds,
-        name=exp_name
+        name=exp_name,
+        jitter=True
     )
 
 

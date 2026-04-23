@@ -10,7 +10,7 @@ corruption:
 
 window:
   input_length: 20
-  forecast_horizon: 1
+  # forecast_horizon: 1
 
 model:
   type: GRU

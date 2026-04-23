@@ -42,11 +42,11 @@ class Trainer:
     # --- metrics ---
     @staticmethod
     def rmse(x_true, x_hat):
-        return tf.sqrt(tf.reduce_mean(tf.square(x_true - x_hat), axis=0))
+        return tf.sqrt(tf.reduce_mean(tf.square(x_true - x_hat), axis=None))
 
     @staticmethod
     def mae(x_true, x_hat):
-        return tf.reduce_mean(tf.abs(x_true - x_hat), axis=0)
+        return tf.reduce_mean(tf.abs(x_true - x_hat), axis=None)
 
     def train(self, train_data, val_data):
         X_train, Y_train = train_data
