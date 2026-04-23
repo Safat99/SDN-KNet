@@ -125,18 +125,20 @@ class Plotter:
         self._plot_line(
             x_true[:num_points].squeeze(), label="True",
             color=self.colors["blue"],
-            linestyle="-",
+            linestyle="--",
             marker="o",
             zorder=3
         )
         self._plot_line(
             x_hat[:num_points].squeeze(), label="Estimated",
             color=self.colors["orange"],
-            linestyle="--",
+            linestyle="-",
             marker="s",
             zorder=2
         )
 
+        plt.xlabel("Time Step")
+        plt.ylabel("Normalized Value")
         plt.title("State Estimation vs Ground Truth")
         plt.legend()
 
@@ -167,25 +169,27 @@ class Plotter:
         self._plot_line(
             x, label="Clean (x)",
             color=self.colors["blue"],
-            linestyle="-",
+            linestyle="--",
             marker="o",
             zorder=4
         )
         self._plot_line(
             y, label="Corrupted (y)",
             color=self.colors["orange"],
-            linestyle="--",
+            linestyle="-",
             marker="s",
             zorder=2
         )
         self._plot_line(
             xh, label="Estimated (x̂)",
             color=self.colors["green"],
-            linestyle=":",
+            linestyle="-",
             marker="^",
             zorder=3
         )
 
+        plt.xlabel("Time Step")
+        plt.ylabel("Normalized Value")
         plt.legend()
         plt.title("Clean vs Corrupted vs Estimated")    
 
