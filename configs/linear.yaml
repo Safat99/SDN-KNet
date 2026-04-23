@@ -1,0 +1,29 @@
+dataset:
+  name: linear
+  sequence_length: 10000
+  A: 0.9 # state transition matrix
+  H: 1.0 # observational matrix
+  Q: 0.01 # process noise co-variance matrix
+  R: 0.05 # measurement noise co-variance matrix  
+
+corruption:
+  delay: 0
+  noise_std: 0.0
+
+window:
+  input_length: 20
+  # forecast_horizon: 1
+
+model:
+  hidden_size: 64
+  num_layers: 1
+
+training:
+  batch_size: 32
+  epochs: 20
+  learning_rate: 0.001
+
+split:
+  train: 0.7
+  val: 0.15
+  test: 0.15
