@@ -4,3 +4,4 @@ tensorflow
 PyYAML
 pykalman
 .codex
+optuna

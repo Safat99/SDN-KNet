@@ -1,7 +1,7 @@
 #!/bin/bash
 #SBATCH --job-name=linear_synthetic_system_test
 #SBATCH --account=priority-johnsheppard
-#SBATCH --partition=gpu
+#SBATCH --partition=gpupriority
 #SBATCH --gres=gpu:1
 # #SBATCH --partition=priority
 #SBATCH --nodes=1
