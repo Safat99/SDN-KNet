@@ -11,8 +11,7 @@ def estimate_delay(y, residual, max_delay=20):
 
     for d in range(max_delay):
         if d == 0:
-            # corr = np.mean(residual * y)
-            corr = np.corrcoef(residual * y)[0,1]
+            corr = np.mean(residual * y)
         else:
             # corr = np.mean(residual[d:] * y[:-d])
             corr = np.corrcoef(residual[d:], y[:-d])[0,1]
