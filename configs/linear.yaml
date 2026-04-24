@@ -19,7 +19,7 @@ model:
   num_layers: 1
 
 training:
-  batch_size: 32
+  batch_size: 32 # since not used so far, GRUBaseline use 32 by default
   epochs: 20
   learning_rate: 0.001
 

@@ -4,7 +4,7 @@
 #SBATCH --partition=priority
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=2
+#SBATCH --cpus-per-task=4
 #SBATCH --mem=8G
 #SBATCH --time=01:00:00
 

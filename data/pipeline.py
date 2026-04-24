@@ -131,3 +131,41 @@ class TimeSeriesPipeline:
         y_norm_full = (y - mean) / std
 
         return data, (mean, std), x_norm_full, y_norm_full
+
+    
+    def create_ssl_windows(self, y):
+        """
+        Self-supervised windowing:
+        input  = y[t-W : t]
+        target = y[t]
+        """
+        X, Y = [], []
+
+        for i in range(len(y) - self.window_size):
+            X.append(y[i : i + self.window_size])
+            Y.append(y[i + self.window_size])
+
+        return np.array(X), np.array(Y)
+    
+    # run self supervised pipeline     
+    def run_ssl(self):
+        x = self.generate_clean()
+        y = self.corrupt(x)
+
+        # split raw
+        splits = self.split(x, y)
+
+        # normalize
+        norm_splits, mean, std = self.normalize(splits)
+
+        # SSL windows (y → y)
+        data = {}
+        for key in norm_splits:
+            _, y_norm = norm_splits[key]
+            X, Y = self.create_ssl_windows(y_norm)
+            data[key] = (X, Y)
+        
+        # full normalized for plotting/debug
+        y_norm_full = (y - mean) / std
+
+        return data, (mean, std), y_norm_full
