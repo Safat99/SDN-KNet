@@ -5,12 +5,17 @@ def estimate_delay(y, residual, max_delay=20):
     Estimate delay using cross-correlation between residual and y
     """
     corrs = []
+    
+    # smooth residual before correlation
+    residual = np.convolve(residual, np.ones(5)/5, mode='same')
 
     for d in range(max_delay):
         if d == 0:
-            corr = np.mean(residual * y)
+            # corr = np.mean(residual * y)
+            corr = np.corrcoef(residual * y)[0,1]
         else:
-            corr = np.mean(residual[d:] * y[:-d])
+            # corr = np.mean(residual[d:] * y[:-d])
+            corr = np.corrcoef(residual[d:], y[:-d])[0,1]
 
         corrs.append(corr)
 

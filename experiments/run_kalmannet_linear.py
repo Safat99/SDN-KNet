@@ -67,15 +67,19 @@ def main():
 
     # ---------------- RESIDUAL ----------------
     residual = y_true - y_hat
+    
+    y_hat_full = model(X_full)  # build from full sequence
+    residual_full = y_norm_full[W:] - y_hat_full
 
     print("Residual mean:", np.mean(residual))
     print("Residual variance:", np.var(residual))
     print("Residual shape:", residual.shape)
     
     # ---------------- ESTIMATION ----------------
-    d_hat, _ = estimate_delay(y_true, residual, max_delay=20)
+    d_hat, corrs = estimate_delay(y_true, residual, max_delay=50)
     sigma2_hat = estimate_noise_variance(residual)
     
+    print(f"corrs: {corrs}")
     print(f"Estimated delay: {d_hat}")
     print(f"Estimated noise variance: {sigma2_hat}")
     
@@ -90,7 +94,7 @@ def main():
     # ------------------------KALMANNET-----------------------
     knet = KalmanNetWrapper(config)
     
-    optimizer = tf.keras.optimizers.Adam(1e-3)
+    optimizer = tf.keras.optimizers.Adam(5e-4)
     
     y_aligned_tf = tf.convert_to_tensor(y_aligned, dtype=tf.float32)
 
@@ -114,7 +118,7 @@ def main():
         print(f"Epoch {epoch+1} | KNet Loss: {loss.numpy():.4f}")
     
     # ---------------- FINAL INFERENCE ----------------
-    x_hat_full = knet(y_input, sigma2_hat, training=True)
+    x_hat_full = knet(y_input, sigma2_hat, training=False)
     x_hat_full = x_hat_full.numpy().squeeze()
     
     # align with test
