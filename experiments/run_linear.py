@@ -31,6 +31,12 @@ def main():
     with open(args.config, "r") as f:
         config = yaml.safe_load(f)
 
+    dataset_name = config["dataset"]["name"]
+    if dataset_name != "linear":
+        raise ValueError(
+            f"run_linear.py expects dataset.name='linear', got '{dataset_name}' from {args.config}"
+        )
+
     # Override from SLURM
     config["corruption"]["delay"] = args.delay
     config["corruption"]["noise_std"] = args.noise
@@ -96,7 +102,14 @@ def main():
         "noise": args.noise,
         "seed": args.seed,
         "model": args.model,
-        "use_em": args.use_em if args.model == "kf" else None
+        "use_em": args.use_em if args.model == "kf" else None,
+        
+        # for debugging anomalies
+        "n_test": len(Y_test),
+        "mean_pred": float(np.mean(preds)),
+        "std_pred": float(np.std(preds)),
+        "mean_true": float(np.mean(Y_test)),
+        "std_true": float(np.std(Y_test))
     }
 
     print("RMSE:", test_rmse)

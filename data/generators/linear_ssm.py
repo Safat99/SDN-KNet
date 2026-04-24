@@ -17,7 +17,6 @@ class LinearSSMGenerator:
         R=0.05, # measurement noise co-variance matrix 
         length=10000, # sequence length, doesn't have to be 10k sec
         x0=0.0,
-        
     ):
         self.A = A
         self.H = H

@@ -3,3 +3,4 @@ matplotlib
 tensorflow
 PyYAML
 pykalman
+.codex

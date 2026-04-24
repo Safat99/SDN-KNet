@@ -34,6 +34,12 @@ def main():
     with open(args.config, "r") as f:
         config = yaml.safe_load(f)
 
+    dataset_name = config["dataset"]["name"]
+    if dataset_name != "mackey_glass":
+        raise ValueError(
+            f"run_mg.py expects dataset.name='mackey_glass', got '{dataset_name}' from {args.config}"
+        )
+
     # Override from SLURM
     config["corruption"]["delay"] = args.delay
     config["corruption"]["noise_std"] = args.noise
@@ -68,12 +74,10 @@ def main():
     model = GRUBaseline(
         hidden_size=config["model"]["hidden_size"],
         num_layers=config["model"]["num_layers"],
-        # output_dim=config["window"]["forecast_horizon"]
         output_dim=1
-        
     )
-
     # TODO: Need to implement Optuna or Grid based hyperparameter tuning
+
     # ---------------- TRAIN ----------------
     trainer = Trainer(model, config)
     trainer.train((X_train, Y_train), (X_val, Y_val))
@@ -97,7 +101,16 @@ def main():
         "seed": args.seed,
         "hidden_size": config["model"]["hidden_size"],
         "num_layers": config["model"]["num_layers"],
-        "epochs": config["training"]["epochs"]
+        "epochs": config["training"]["epochs"],
+        
+        "model": args.model,
+        "use_em": args.use_em if args.model == "kf" else None,
+        # for debugging anomalies
+        "n_test": len(Y_test),
+        "mean_pred": float(np.mean(preds)),
+        "std_pred": float(np.std(preds)),
+        "mean_true": float(np.mean(Y_test)),
+        "std_true": float(np.std(Y_test))
     }
 
     print(f"Test RMSE: {test_rmse:.4f}")
