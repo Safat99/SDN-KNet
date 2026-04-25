@@ -12,8 +12,9 @@
 
 ## SBATCH --array=0-0 # now for test one job
 #SBATCH --array=0-119%10
-#SBATCH --output=slurm_logs/linear_synthetic_ssm/%x-%A_%a.out
-#SBATCH --error=slurm_logs/linear_synthetic_ssm/%x-%A_%a.err
+
+#SBATCH --output=slurm_logs/linear_synthetic_ssm/updated/%x-%A_%a.out
+#SBATCH --error=slurm_logs/linear_synthetic_ssm/updated/%x-%A_%a.err
 
 echo "===== Linear Experiment Started ====="
 

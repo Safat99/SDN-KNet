@@ -7,10 +7,10 @@
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --time=01:00:00
+#SBATCH --time=04:00:00
 
-#SBATCH --output=slurm_logs/tuning/mg/%x-%j.out
-#SBATCH --error=slurm_logs/tuning/mg/%x-%j.err
+#SBATCH --output=slurm_logs/tuning/mg/updated/%x-%j.out
+#SBATCH --error=slurm_logs/tuning/mg/updated/%x-%j.err
 
 echo "===== TUNING GRU (MACKEY-GLASS) STARTED ====="
 
