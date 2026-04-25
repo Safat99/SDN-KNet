@@ -23,7 +23,10 @@ class KalmanNetWrapper(tf.keras.Model):
         if sigma2_hat is None:
             sigma2_hat = tf.constant(0.01, dtype=tf.float32)
 
-        T = tf.shape(y_seq)[1]
+        T = y_seq.shape[1]
+        
+        if T is None:
+            raise ValueError("Time dimension must be known for KalmanNetWrapper.")
 
         x_hat_list = []
         y_prior_list = []
