@@ -42,6 +42,11 @@ def main():
     config["corruption"]["delay"] = args.delay
     config["corruption"]["noise_std"] = args.noise
 
+    # ---------------- 🔥 FIX FOR KALMANNET ----------------
+    # MG has no A, H → inject identity dynamics
+    config["dataset"]["A"] = 1.0
+    config["dataset"]["H"] = 1.0
+
     # ---------------- SEED ----------------
     np.random.seed(args.seed)
     tf.random.set_seed(args.seed)
@@ -77,9 +82,13 @@ def main():
     trainer.train((X_train, Y_train), (X_val, Y_val))
 
     # ---------------- TEST ----------------
-    preds = model(X_test, training=False).numpy()
+    preds = model(X_test, training=False)
 
-    preds = preds.squeeze()
+    # safety (in case wrapper returns tuple in future)
+    if isinstance(preds, tuple):
+        preds = preds[0]
+
+    preds = preds.numpy().squeeze()
     Y_test = Y_test.squeeze()
 
     # ---------------- METRICS ----------------
@@ -125,7 +134,6 @@ def main():
 
     plot_dir = "results/mg_knet/plots"
     os.makedirs(plot_dir, exist_ok=True)
-
 
     plotter.plot_training(trainer.history, name=f"{plot_dir}/{exp_name}")
     plotter.plot_predictions(Y_test, preds, name=f"{plot_dir}/{exp_name}")
