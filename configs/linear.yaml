@@ -11,17 +11,17 @@ corruption:
   noise_std: 0.0
 
 window:
-  input_length: 20
+  input_length: 30
   # forecast_horizon: 1
 
 model:
-  hidden_size: 64
+  hidden_size: 32
   num_layers: 1
 
 training:
-  batch_size: 32 # since not used so far, GRUBaseline use 32 by default
+  batch_size: 64 # since not used so far, GRUBaseline use 32 by default
   epochs: 20
-  learning_rate: 0.001
+  learning_rate: 0.00015
 
 split:
   train: 0.7
