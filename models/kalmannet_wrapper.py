@@ -7,7 +7,7 @@ class KalmanNetWrapper(tf.keras.Model):
         self.A = tf.constant(config["dataset"]["A"], dtype=tf.float32)
         self.H = tf.constant(config["dataset"]["H"], dtype=tf.float32)
 
-        self.return_prior = return_prior  # 🔥 control output behavior
+        self.return_prior = return_prior
 
         self.gru = tf.keras.layers.GRU(
             config["model"]["hidden_size"],
