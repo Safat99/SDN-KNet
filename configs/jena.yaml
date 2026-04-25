@@ -3,10 +3,10 @@ dataset:
   path: data/jena_climate_2009_2016.csv
   target_column: "T (degC)"
 
-  split:
-    train: 0.7
-    val: 0.15
-    test: 0.15
+split:
+  train: 0.7
+  val: 0.15
+  test: 0.15
 
 window:
   input_length: 30
