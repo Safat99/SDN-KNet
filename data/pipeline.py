@@ -39,12 +39,54 @@ class TimeSeriesPipeline:
     # -----------------------------
     # Step 1: Generate clean data
     # -----------------------------
+    # def generate_clean(self):
+    #     if self.config["dataset"]["name"] == "linear":
+    #         x, _ = self.generator.generate()
+    #         return x
+    #     else:
+    #         return self.generator.generate()
+    
     def generate_clean(self):
-        if self.config["dataset"]["name"] == "linear":
-            x, _ = self.generator.generate()
-            return x
-        else:
-            return self.generator.generate()
+    dataset_name = self.config["dataset"]["name"]
+
+    # =========================
+    # LINEAR (unchanged)
+    # =========================
+    if dataset_name == "linear":
+        x, _ = self.generator.generate()
+        return x
+
+    # =========================
+    # MG or other synthetic (unchanged)
+    # =========================
+    elif dataset_name in ["mg", "mackey_glass"]:
+        return self.generator.generate()
+
+    # =========================
+    # JENA (NEW)
+    # =========================
+    elif dataset_name == "jena":
+        import pandas as pd
+
+        path = self.config["dataset"]["path"]
+        column = self.config["dataset"]["target_column"]
+
+        df = pd.read_csv(path)
+
+        if column not in df.columns:
+            raise ValueError(f"Column '{column}' not found in dataset")
+
+        y = df[column].values.astype(np.float32)
+
+        print("Loaded Jena data:", y.shape)
+
+        return y
+
+    # =========================
+    # FALLBACK (safety)
+    # =========================
+    else:
+        raise ValueError(f"Unknown dataset: {dataset_name}")
 
     # -----------------------------
     # Step 2: Apply corruption
