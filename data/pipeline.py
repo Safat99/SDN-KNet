@@ -47,46 +47,46 @@ class TimeSeriesPipeline:
     #         return self.generator.generate()
     
     def generate_clean(self):
-    dataset_name = self.config["dataset"]["name"]
+        dataset_name = self.config["dataset"]["name"]
 
-    # =========================
-    # LINEAR (unchanged)
-    # =========================
-    if dataset_name == "linear":
-        x, _ = self.generator.generate()
-        return x
+        # =========================
+        # LINEAR (unchanged)
+        # =========================
+        if dataset_name == "linear":
+            x, _ = self.generator.generate()
+            return x
 
-    # =========================
-    # MG or other synthetic (unchanged)
-    # =========================
-    elif dataset_name in ["mg", "mackey_glass"]:
-        return self.generator.generate()
+        # =========================
+        # MG or other synthetic (unchanged)
+        # =========================
+        elif dataset_name in ["mg", "mackey_glass"]:
+            return self.generator.generate()
 
-    # =========================
-    # JENA (NEW)
-    # =========================
-    elif dataset_name == "jena":
-        import pandas as pd
+        # =========================
+        # JENA (NEW)
+        # =========================
+        elif dataset_name == "jena":
+            import pandas as pd
 
-        path = self.config["dataset"]["path"]
-        column = self.config["dataset"]["target_column"]
+            path = self.config["dataset"]["path"]
+            column = self.config["dataset"]["target_column"]
 
-        df = pd.read_csv(path)
+            df = pd.read_csv(path)
 
-        if column not in df.columns:
-            raise ValueError(f"Column '{column}' not found in dataset")
+            if column not in df.columns:
+                raise ValueError(f"Column '{column}' not found in dataset")
 
-        y = df[column].values.astype(np.float32)
+            y = df[column].values.astype(np.float32)
 
-        print("Loaded Jena data:", y.shape)
+            print("Loaded Jena data:", y.shape)
 
-        return y
+            return y
 
-    # =========================
-    # FALLBACK (safety)
-    # =========================
-    else:
-        raise ValueError(f"Unknown dataset: {dataset_name}")
+        # =========================
+        # FALLBACK (safety)
+        # =========================
+        else:
+            raise ValueError(f"Unknown dataset: {dataset_name}")
 
     # -----------------------------
     # Step 2: Apply corruption
