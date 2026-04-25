@@ -207,7 +207,7 @@ def main():
         y_norm_full[-len(pred_test):],
         y_aligned[-len(pred_test):],
         pred_test,
-        name=exp_name",
+        name=exp_name,
         jitter=True
     )
 
