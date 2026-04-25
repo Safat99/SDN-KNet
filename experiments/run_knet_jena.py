@@ -186,7 +186,7 @@ def main():
 
     # plots
     plotter = Plotter()
-    plot_dir = "results/mg_knet/plots"
+    plot_dir = "results/jena_knet/plots"
     os.makedirs(plot_dir, exist_ok=True)
 
     plotter.plot_predictions(true_test, pred_test, name=f"{plot_dir}/{exp_name}")
