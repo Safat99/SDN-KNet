@@ -80,7 +80,7 @@ def main():
     trainer.train((X_train, Y_train), (X_val, Y_val))
 
     # =========================================================
-    # 2️⃣ RESIDUALS
+    # 2️⃣ RESIDUALS (FIXED: BATCHED INFERENCE)
     # =========================================================
     W = config["window"]["input_length"]
 
@@ -88,7 +88,21 @@ def main():
     X_full = X_full.astype(np.float32)[..., np.newaxis]
     Y_full = Y_full.astype(np.float32)
 
-    y_hat_full = model(X_full, training=False).numpy().squeeze()
+    print("\nRunning batched inference for full sequence...\n")
+
+    batch_size = 1024  # safe for GPU (reduce if needed)
+    preds_list = []
+
+    for i in range(0, len(X_full), batch_size):
+        batch = X_full[i:i+batch_size]
+        preds = model(batch, training=False)
+
+        if isinstance(preds, tuple):
+            preds = preds[0]
+
+        preds_list.append(preds.numpy())
+
+    y_hat_full = np.concatenate(preds_list, axis=0).squeeze()
     y_true_full = Y_full.squeeze()
 
     residual_full = y_true_full - y_hat_full
@@ -144,7 +158,7 @@ def main():
         print(f"Epoch {epoch+1} | KNet Loss: {loss.numpy():.4f}")
 
     # =========================================================
-    # 6️⃣ FINAL OUTPUT (your original evaluation style kept)
+    # 6️⃣ FINAL OUTPUT
     # =========================================================
     x_hat_full, _ = knet(y_input, sigma2_hat, training=False)
     x_hat_full = x_hat_full.numpy().squeeze()
@@ -165,7 +179,6 @@ def main():
 
     saver = ResultSaver(base_dir="results/jena/knet/data")
 
-    # save predictions
     saver.save_predictions(
         x_true=true_test,
         x_hat=pred_test,
@@ -173,7 +186,6 @@ def main():
         name=exp_name
     )
 
-    # save metrics
     saver.save_metrics({
         "rmse": float(test_rmse),
         "mae": float(test_mae),
@@ -184,7 +196,6 @@ def main():
         "estimated_noise": float(sigma2_hat)
     }, exp_name)
 
-    # plots
     plotter = Plotter()
     plot_dir = "results/jena_knet/plots"
     os.makedirs(plot_dir, exist_ok=True)
