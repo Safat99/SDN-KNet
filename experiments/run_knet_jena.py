@@ -41,6 +41,9 @@ def main():
         config = yaml.safe_load(f)
 
     config["corruption"]["delay"] = args.delay
+    
+    config["dataset"]["A"] = 1.0
+    config["dataset"]["H"] = 1.0
 
     # ---------------- SEED ----------------
     np.random.seed(args.seed)
