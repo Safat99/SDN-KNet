@@ -9,18 +9,18 @@ corruption:
   noise_std: 0.1       # sigma
 
 window:
-  input_length: 20
+  input_length: 30
   # forecast_horizon: 1
 
 model:
   type: GRU
-  hidden_size: 64
+  hidden_size: 32
   num_layers: 1
 
 training:
-  batch_size: 32
+  batch_size: 64
   epochs: 20
-  learning_rate: 0.001
+  learning_rate: 0.0001
 
 split:
   train: 0.7
