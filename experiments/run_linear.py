@@ -116,7 +116,8 @@ def main():
     print("MAE:", test_mae)
 
     # ---------------- SAVE ----------------
-    exp_name = f"{args.model}_linear_d{args.delay}_n{args.noise}_s{args.seed}"
+    # exp_name = f"{args.model}_linear_d{args.delay}_n{args.noise}_s{args.seed}"
+    exp_name = f"{args.model}_linear_d{args.delay}_n{args.noise}_s{args.seed}_em{int(args.use_em)}"
     
     if args.model == "kf" and args.use_em:
         exp_name += "_with_em"
