@@ -199,17 +199,15 @@ def main():
         "estimated_noise": float(sigma2_hat)
     }, exp_name)
 
-    plotter = Plotter()
-    plot_dir = "results/jena_knet/plots"
-    os.makedirs(plot_dir, exist_ok=True)
+    plotter = Plotter("results/jena_knet/plots")
 
-    plotter.plot_predictions(true_test, pred_test, name=f"{plot_dir}/{exp_name}")
+    plotter.plot_predictions(true_test, pred_test, name=exp_name)
 
     plotter.plot_full_comparison(
         y_norm_full[-len(pred_test):],
         y_aligned[-len(pred_test):],
         pred_test,
-        name=f"{plot_dir}/{exp_name}",
+        name=exp_name",
         jitter=True
     )
 

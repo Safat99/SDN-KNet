@@ -211,26 +211,21 @@ def main():
     )
 
     # ---------------- PLOTS ----------------
-    plot_dir = "results/mg_sdn_knet/plots"
-    os.makedirs(plot_dir, exist_ok=True)
+    plotter = Plotter("results/mg_sdn_knet/plots")
 
-    plotter.plot_predictions(
-        y_eval,
-        x_hat,
-        name=f"{plot_dir}/{exp_name}"
-    )
+    plotter.plot_predictions(y_eval, x_hat, name=exp_name)
 
     plotter.plot_full_comparison(
         y_eval,
         y_eval,
         x_hat,
-        name=f"{plot_dir}/{exp_name}",
+        name=exp_name,
         jitter=True
     )
 
     plotter.plot_training(
         {"knet_loss": knet_losses},
-        name=f"{plot_dir}/{exp_name}_knet"
+        name=exp_name + "_knet"
     )
 
 
