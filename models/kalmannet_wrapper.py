@@ -1,11 +1,13 @@
 import tensorflow as tf
 
 class KalmanNetWrapper(tf.keras.Model):
-    def __init__(self, config):
+    def __init__(self, config, return_prior=False):
         super().__init__()
 
         self.A = tf.constant(config["dataset"]["A"], dtype=tf.float32)
         self.H = tf.constant(config["dataset"]["H"], dtype=tf.float32)
+
+        self.return_prior = return_prior  # 🔥 control output behavior
 
         self.gru = tf.keras.layers.GRU(
             config["model"]["hidden_size"],
@@ -15,15 +17,19 @@ class KalmanNetWrapper(tf.keras.Model):
 
         self.fc = tf.keras.layers.Dense(1)
 
-    def call(self, y_seq, sigma2_hat, training=False):
+    def call(self, y_seq, sigma2_hat=None, training=False):
+
+        # -------- safe sigma fallback --------
+        if sigma2_hat is None:
+            sigma2_hat = tf.constant(0.01, dtype=tf.float32)
 
         T = tf.shape(y_seq)[1]
 
         x_hat_list = []
         y_prior_list = []
 
-        # better init
-        x_prev = y_seq[:, 0, :]
+        # better init (stable)
+        x_prev = y_seq[:, 0, :] / (self.H + 1e-6)
         h_state = None
 
         for t in range(T):
@@ -33,7 +39,7 @@ class KalmanNetWrapper(tf.keras.Model):
             x_prior = self.A * x_prev
             y_prior = self.H * x_prior
 
-            y_prior_list.append(y_prior)  # 🔥 IMPORTANT
+            y_prior_list.append(y_prior)
 
             # -------- Innovation --------
             innovation = tf.clip_by_value(y_t - y_prior, -5.0, 5.0)
@@ -61,9 +67,14 @@ class KalmanNetWrapper(tf.keras.Model):
             x_hat_list.append(x_hat)
             x_prev = x_hat
 
+            # optional debug safety
             tf.debugging.check_numerics(x_hat, "NaN in x_hat")
 
         x_hat_seq = tf.stack(x_hat_list, axis=1)
         y_prior_seq = tf.stack(y_prior_list, axis=1)
 
-        return x_hat_seq, y_prior_seq
+        # -------- OUTPUT CONTROL --------
+        if self.return_prior:
+            return x_hat_seq, y_prior_seq
+        else:
+            return x_hat_seq
