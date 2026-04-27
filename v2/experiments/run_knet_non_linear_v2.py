@@ -323,7 +323,7 @@ def main():
     plt.plot(x_true_test[:200], label="x_true (clean)", linewidth=2)
     plt.plot(y_obs_test[:200], label="y_obs (corrupted)", alpha=0.8)
     plt.plot(y_hat_test_compensated[:200], label="y_hat (estimated(not denoised))",  linewidth=2, color='black')
-    plt.plot(x_hat_test[:200], label="x_hat (KalmanNet)", linewidth=2, color='red')
+    # plt.plot(x_hat_test[:200], label="x_hat (KalmanNet)", linewidth=2, color='red')
 
     plt.legend()
     plt.title("Mackey Glass Signal Denoising")
