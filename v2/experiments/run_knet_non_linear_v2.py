@@ -288,21 +288,21 @@ def main():
     # 10. KalmanNet inference
     # --------------------------
     # y_obs_train = y_obs[:start_test_idx]
-    # y_obs_train = y_obs[:300]
+    y_obs_train = y_obs[:300]
     
-    # knet = train_kalmannet(
-    #     y_obs_train,
-    #     estimated_delay,
-    #     noise_var_test,
-    #     epochs=50
-    # )
+    knet = train_kalmannet(
+        y_obs_train,
+        estimated_delay,
+        noise_var_test,
+        epochs=50
+    )
     
-    # x_hat_test = run_kalmannet_inference(
-    #     knet,
-    #     y_obs_test,
-    #     estimated_delay,
-    #     noise_var_test
-    # )
+    x_hat_test = run_kalmannet_inference(
+        knet,
+        y_obs_test,
+        estimated_delay,
+        noise_var_test
+    )
 
         
     # --------------------------
@@ -310,11 +310,11 @@ def main():
     # --------------------------
     rmse_obs_test = rmse(y_obs_test, x_true_test)
     rmse_hat_test = rmse(y_hat_test_compensated, x_true_test)
-    # rmse_knet = rmse(x_hat_test, x_true_test[:len(x_hat_test)])
+    rmse_knet = rmse(x_hat_test, x_true_test[:len(x_hat_test)])
 
     print(f"RMSE (observed vs true): {rmse_obs_test:.4f}")
     print(f"RMSE (denoised vs true): {rmse_hat_test:.4f}")
-    # print(f"RMSE (KalmanNet vs true): {rmse_knet:.4f}")
+    print(f"RMSE (KalmanNet vs true): {rmse_knet:.4f}")
     
     # --------------------------
     # 12. Plot
@@ -322,8 +322,8 @@ def main():
     plt.figure(figsize=(10, 5))
     plt.plot(x_true_test[:200], label="x_true (clean)", linewidth=2)
     plt.plot(y_obs_test[:200], label="y_obs (corrupted)", alpha=0.8)
-    plt.plot(y_hat_test_compensated[:200], label="y_hat (estimated(not denoised))",  linewidth=2, color='black')
-    # plt.plot(x_hat_test[:200], label="x_hat (KalmanNet)", linewidth=2, color='red')
+    plt.plot(y_hat_test_compensated[:200], label="y_hat (estimated)",  linewidth=2, color='black')
+    plt.plot(x_hat_test[:200], label="x_hat (KalmanNet)", linewidth=2, color='red')
 
     plt.legend()
     plt.title("Mackey Glass Signal Denoising")
@@ -332,7 +332,7 @@ def main():
     plt.grid(True)
 
     # plt.show()
-    plt.savefig('non_linear_v2_gru.png')
+    plt.savefig('non_linear_v2_knet.png')
 
 
 if __name__ == "__main__":
