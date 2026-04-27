@@ -67,3 +67,161 @@ then we plugged into the KalmanNet (only y_obs, output noise from the gru encode
 
 RMSE (KalmanNet vs true): 6.6679
 (the first run, just the forward pass...that means it hasn't trained yet)
+
+
+after training here are the results >>> 
+
+Epoch 1/10
+/home/safat/projects/msu/msu_cs_spring_26/sdn-knet/venv/lib/python3.10/site-packages/keras/initializers/initializers_v2.py:120: UserWarning: The initializer GlorotUniform is unseeded and being called multiple times, which will return identical values  each time (even if the initializer is unseeded). Please update your code to provide a seed to the initializer, or avoid using the same initalizer instance more than once.
+  warnings.warn(
+110/110 [==============================] - 9s 14ms/step - loss: 1.5810 - val_loss: 1.4613
+Epoch 2/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.3744 - val_loss: 1.3107
+Epoch 3/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.2675 - val_loss: 1.2278
+Epoch 4/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.2035 - val_loss: 1.1763
+Epoch 5/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.1613 - val_loss: 1.1413
+Epoch 6/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.1295 - val_loss: 1.1143
+Epoch 7/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.1057 - val_loss: 1.0949
+Epoch 8/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.0871 - val_loss: 1.0796
+Epoch 9/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.0721 - val_loss: 1.0673
+Epoch 10/10
+110/110 [==============================] - 1s 6ms/step - loss: 1.0600 - val_loss: 1.0572
+estimated delay found: 0
+estimated_noise_found: 88.2833
+estimated_noise_std: 9.3959
+
+and then got this from the kalmannet training >> 
+
+innovation mean: 0.812171042
+[KalmanNet] Epoch 1, Loss: 1.0382
+innovation mean: 0.811825275
+[KalmanNet] Epoch 2, Loss: 1.0373
+innovation mean: 0.811466336
+[KalmanNet] Epoch 3, Loss: 1.0363
+innovation mean: 0.811093748
+[KalmanNet] Epoch 4, Loss: 1.0354
+innovation mean: 0.810706913
+[KalmanNet] Epoch 5, Loss: 1.0344
+innovation mean: 0.810305297
+[KalmanNet] Epoch 6, Loss: 1.0334
+innovation mean: 0.809888124
+[KalmanNet] Epoch 7, Loss: 1.0324
+innovation mean: 0.809458435
+[KalmanNet] Epoch 8, Loss: 1.0313
+innovation mean: 0.809037805
+[KalmanNet] Epoch 9, Loss: 1.0303
+innovation mean: 0.808600128
+[KalmanNet] Epoch 10, Loss: 1.0292
+innovation mean: 0.808149457
+[KalmanNet] Epoch 11, Loss: 1.0281
+innovation mean: 0.807686448
+[KalmanNet] Epoch 12, Loss: 1.0270
+innovation mean: 0.80720365
+[KalmanNet] Epoch 13, Loss: 1.0258
+innovation mean: 0.806699872
+[KalmanNet] Epoch 14, Loss: 1.0246
+innovation mean: 0.806173801
+[KalmanNet] Epoch 15, Loss: 1.0235
+innovation mean: 0.805630386
+[KalmanNet] Epoch 16, Loss: 1.0223
+innovation mean: 0.805069625
+[KalmanNet] Epoch 17, Loss: 1.0210
+innovation mean: 0.804481447
+[KalmanNet] Epoch 18, Loss: 1.0198
+innovation mean: 0.803868711
+[KalmanNet] Epoch 19, Loss: 1.0185
+innovation mean: 0.803259075
+[KalmanNet] Epoch 20, Loss: 1.0173
+innovation mean: 0.802636683
+[KalmanNet] Epoch 21, Loss: 1.0160
+innovation mean: 0.801999152
+[KalmanNet] Epoch 22, Loss: 1.0147
+innovation mean: 0.801345646
+[KalmanNet] Epoch 23, Loss: 1.0133
+innovation mean: 0.800674617
+[KalmanNet] Epoch 24, Loss: 1.0120
+innovation mean: 0.799963593
+[KalmanNet] Epoch 25, Loss: 1.0107
+innovation mean: 0.799215317
+[KalmanNet] Epoch 26, Loss: 1.0094
+innovation mean: 0.798556328
+[KalmanNet] Epoch 27, Loss: 1.0081
+innovation mean: 0.797912836
+[KalmanNet] Epoch 28, Loss: 1.0068
+innovation mean: 0.797232389
+[KalmanNet] Epoch 29, Loss: 1.0056
+innovation mean: 0.796623468
+[KalmanNet] Epoch 30, Loss: 1.0044
+innovation mean: 0.796007395
+[KalmanNet] Epoch 31, Loss: 1.0033
+innovation mean: 0.795425
+[KalmanNet] Epoch 32, Loss: 1.0023
+innovation mean: 0.794799924
+[KalmanNet] Epoch 33, Loss: 1.0016
+innovation mean: 0.794258296
+[KalmanNet] Epoch 34, Loss: 1.0012
+innovation mean: 0.793957293
+[KalmanNet] Epoch 35, Loss: 1.0016
+innovation mean: 0.794028521
+[KalmanNet] Epoch 36, Loss: 1.0029
+innovation mean: 0.794222593
+[KalmanNet] Epoch 37, Loss: 1.0036
+innovation mean: 0.79398191
+[KalmanNet] Epoch 38, Loss: 1.0029
+innovation mean: 0.793761075
+[KalmanNet] Epoch 39, Loss: 1.0018
+innovation mean: 0.793752909
+[KalmanNet] Epoch 40, Loss: 1.0010
+innovation mean: 0.793890357
+[KalmanNet] Epoch 41, Loss: 1.0007
+innovation mean: 0.794126153
+[KalmanNet] Epoch 42, Loss: 1.0007
+innovation mean: 0.794401407
+[KalmanNet] Epoch 43, Loss: 1.0008
+innovation mean: 0.794611
+[KalmanNet] Epoch 44, Loss: 1.0009
+innovation mean: 0.794755936
+[KalmanNet] Epoch 45, Loss: 1.0011
+innovation mean: 0.794844687
+[KalmanNet] Epoch 46, Loss: 1.0011
+innovation mean: 0.794883907
+[KalmanNet] Epoch 47, Loss: 1.0012
+innovation mean: 0.794878483
+[KalmanNet] Epoch 48, Loss: 1.0012
+innovation mean: 0.794831872
+[KalmanNet] Epoch 49, Loss: 1.0011
+innovation mean: 0.794746459
+[KalmanNet] Epoch 50, Loss: 1.0010
+RMSE (observed vs true): 9.9415
+RMSE (denoised vs true): 2.5431
+RMSE (KalmanNet vs true): 0.2586
+
+
+summary: 
+
+📊 Table: Performance Comparison on Linear Dynamic System (σ ≈ 10, τ = 5)
+Method	RMSE (↓ better)	Noise Std Estimate	Delay Estimate	Notes
+Observed Signal (y_obs)	9.9415	—	—	Raw noisy measurement
+GRU Baseline (y_hat)	2.5431	—	—	Learned smoothing / prediction
+KalmanNet (x_hat)	0.2586	9.3959 (≈10 true)	0 (vs true 5)	Model-based filtering with learned gain
+📈 Training Behavior (KalmanNet)
+Metric	Value
+Initial Loss	1.0382
+Final Loss	~1.0010
+Innovation Mean	0.81 → 0.79 (stable)
+Convergence	Reached noise floor (expected ≈1)
+
+
+--------
+Key Observations
+KalmanNet significantly improves state estimation over both raw observations and GRU baseline.
+Noise variance estimation is accurate (≈ true σ² ≈ 100).
+Loss converges to expected noise floor, indicating stable unsupervised training.
+Delay estimation failed (estimated τ = 0), suggesting limitation in current delay module.
