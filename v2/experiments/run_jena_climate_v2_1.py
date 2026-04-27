@@ -225,7 +225,7 @@ def main():
     plt.legend()
     plt.title("Jena Climate Estimation")
     plt.grid(True)
-    plt.show()
+    plt.savefig('jena_climate_estimation.png')
 
 
 if __name__ == "__main__":
