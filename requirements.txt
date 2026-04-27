@@ -5,3 +5,4 @@ PyYAML
 pykalman
 .codex
 optuna
+scipy

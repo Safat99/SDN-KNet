@@ -32,7 +32,8 @@ class KalmanNetWrapper(tf.keras.Model):
         y_prior_list = []
 
         # better init (stable)
-        x_prev = y_seq[:, 0, :] / (self.H + 1e-6)
+        # x_prev = y_seq[:, 0, :] / (self.H + 1e-6)
+        x_prev = tf.zeros_like(y_seq[:, 0, :])
         h_state = None
 
         for t in range(T):
@@ -45,9 +46,12 @@ class KalmanNetWrapper(tf.keras.Model):
             y_prior_list.append(y_prior)
 
             # -------- Innovation --------
-            innovation = tf.clip_by_value(y_t - y_prior, -5.0, 5.0)
+            innovation = y_t - y_prior
+            innovation = innovation / (tf.sqrt(sigma2_hat) + 1e-6)
 
             # -------- Sigma feature --------
+            sigma2_hat = tf.cast(sigma2_hat, tf.float32)
+            
             sigma_feat = tf.math.log(sigma2_hat + 1e-6)
             sigma_feat = tf.ones_like(innovation) * sigma_feat
 

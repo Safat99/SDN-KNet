@@ -1,0 +1,69 @@
+True delay: 5 # fixed delay
+Noise std: 10.0 #gaussian white noise
+
+
+GRU Baseline with Linear Dynamic System
+
+Epoch 1/10
+110/110 [==============================] - 3s 16ms/step - loss: 1.0030 - val_loss: 1.0122
+Epoch 2/10
+110/110 [==============================] - 1s 13ms/step - loss: 1.0013 - val_loss: 1.0108
+Epoch 3/10
+110/110 [==============================] - 2s 14ms/step - loss: 1.0012 - val_loss: 1.0101
+Epoch 4/10
+110/110 [==============================] - 2s 15ms/step - loss: 1.0011 - val_loss: 1.0104
+Epoch 5/10
+110/110 [==============================] - 1s 13ms/step - loss: 1.0013 - val_loss: 1.0105
+Epoch 6/10
+110/110 [==============================] - 2s 14ms/step - loss: 1.0011 - val_loss: 1.0099
+Epoch 7/10
+110/110 [==============================] - 1s 13ms/step - loss: 1.0011 - val_loss: 1.0102
+Epoch 8/10
+110/110 [==============================] - 1s 13ms/step - loss: 1.0010 - val_loss: 1.0104
+Epoch 9/10
+110/110 [==============================] - 2s 14ms/step - loss: 1.0011 - val_loss: 1.0102
+Epoch 10/10
+110/110 [==============================] - 2s 14ms/step - loss: 1.0011 - val_loss: 1.0097
+estimated delay found: 0
+estimated_noise_found: 99.1752
+estimated_noise_std: 9.9587
+RMSE (observed vs true): 9.9415
+RMSE (denoised vs true): 0.4088 
+
+
+
+
+GRUEncoder from Cho with the same Linear Dynamic System
+Epoch 1/10
+110/110 [==============================] - 8s 13ms/step - loss: 1.1558 - val_loss: 1.1236
+Epoch 2/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0934 - val_loss: 1.0839
+Epoch 3/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0662 - val_loss: 1.0625
+Epoch 4/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0487 - val_loss: 1.0478
+Epoch 5/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0365 - val_loss: 1.0372
+Epoch 6/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0277 - val_loss: 1.0303
+Epoch 7/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0211 - val_loss: 1.0247
+Epoch 8/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0160 - val_loss: 1.0207
+Epoch 9/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0121 - val_loss: 1.0172
+Epoch 10/10
+110/110 [==============================] - 1s 5ms/step - loss: 1.0090 - val_loss: 1.0148
+estimated delay found: 0
+estimated_noise_found: 93.4031
+estimated_noise_std: 9.6645
+RMSE (observed vs true): 9.9415
+RMSE (denoised vs true): 1.0983
+
+
+
+then we plugged into the KalmanNet (only y_obs, output noise from the gru encoder/gru baseline will go)
+>> going to add more results after kalmannet learns >> 
+
+RMSE (KalmanNet vs true): 6.6679
+(the first run, just the forward pass...that means it hasn't trained yet)

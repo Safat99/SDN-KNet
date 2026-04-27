@@ -97,7 +97,7 @@ class TimeSeriesPipeline:
         return y
 
     # -----------------------------
-    # Step 3: Split RAW sequences
+    # Step 3: Split RAW sequences (no shuffling done to respect the temporal order)
     # -----------------------------
     def split(self, x, y):
         n = len(x)
