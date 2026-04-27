@@ -288,8 +288,8 @@ def main():
     # --------------------------
     # 10. KalmanNet inference
     # --------------------------
-    y_obs_train = y_obs[:start_test_idx]
-    # y_obs_train = y_obs[:300]
+    # y_obs_train = y_obs[:start_test_idx]
+    y_obs_train = y_obs[:1000]
     
     knet = train_kalmannet(
         y_obs_train,
