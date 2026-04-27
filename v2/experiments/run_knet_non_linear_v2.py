@@ -179,6 +179,7 @@ def train_kalmannet(y_obs_train, delay, noise_var, epochs=10):
             _, y_prior_seq = knet(y_seq, sigma2_hat=noise_var)
             
             innovation = y_seq - y_prior_seq
+            
             tf.print("innovation mean:", tf.reduce_mean(tf.abs(innovation)))
             
             # -------- loss --------
@@ -287,8 +288,8 @@ def main():
     # --------------------------
     # 10. KalmanNet inference
     # --------------------------
-    # y_obs_train = y_obs[:start_test_idx]
-    y_obs_train = y_obs[:300]
+    y_obs_train = y_obs[:start_test_idx]
+    # y_obs_train = y_obs[:300]
     
     knet = train_kalmannet(
         y_obs_train,
@@ -332,7 +333,7 @@ def main():
     plt.grid(True)
 
     # plt.show()
-    plt.savefig('non_linear_v2_knet.png')
+    plt.savefig('non_linear_v2_knet_more_training_samples.png')
 
 
 if __name__ == "__main__":
