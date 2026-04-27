@@ -225,3 +225,343 @@ KalmanNet significantly improves state estimation over both raw observations and
 Noise variance estimation is accurate (≈ true σ² ≈ 100).
 Loss converges to expected noise floor, indicating stable unsupervised training.
 Delay estimation failed (estimated τ = 0), suggesting limitation in current delay module.
+
+
+
+======================= kalmannet on mackay glass result =======================================
+
+
+Epoch 1/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 69s 107ms/step - loss: 1.0026 - val_loss: 0.9955
+Epoch 2/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 4s 33ms/step - loss: 1.0024 - val_loss: 0.9957
+Epoch 3/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0023 - val_loss: 0.9957
+Epoch 4/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0022 - val_loss: 0.9959
+Epoch 5/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0021 - val_loss: 0.9957
+Epoch 6/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0020 - val_loss: 0.9961
+Epoch 7/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0018 - val_loss: 0.9964
+Epoch 8/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0018 - val_loss: 0.9964
+Epoch 9/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0018 - val_loss: 0.9964
+Epoch 10/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0017 - val_loss: 0.9969
+estimated delay found: 0
+estimated_noise_found: 96.4422
+estimated_noise_std: 9.8205
+RMSE (observed vs true): 9.8750
+RMSE (denoised vs true): 0.4083
+(sdn_tf) [q86c296@tempest-login SDN-KNet]$ git pull
+remote: Enumerating objects: 9, done.
+remote: Counting objects: 100% (9/9), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 5 (delta 3), reused 5 (delta 3), pack-reused 0 (from 0)
+Unpacking objects: 100% (5/5), 588 bytes | 34.00 KiB/s, done.
+From github.com:Safat99/SDN-KNet
+   ad4e315..23e3231  main       -> origin/main
+Updating ad4e315..23e3231
+Fast-forward
+ v2/experiments/run_knet_non_linear_v2.py | 36 ++++++++++++++++----------------
+ 1 file changed, 18 insertions(+), 18 deletions(-)
+(sdn_tf) [q86c296@tempest-login SDN-KNet]$ python -m v2.experiments.run_knet_non_linear_v2
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1777291985.469480   12041 cpu_feature_guard.cc:227] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+True delay: 5
+Noise std: 10.0
+Train size: 6790, Val size: 1455, Test size: 1455
+E0000 00:00:1777291989.075215   12041 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+Epoch 1/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 70s 108ms/step - loss: 1.3994 - val_loss: 1.3053
+Epoch 2/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.2550 - val_loss: 1.1990
+Epoch 3/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.1837 - val_loss: 1.1424
+Epoch 4/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.1398 - val_loss: 1.1062
+Epoch 5/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.1089 - val_loss: 1.0800
+Epoch 6/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0858 - val_loss: 1.0610
+Epoch 7/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0679 - val_loss: 1.0465
+Epoch 8/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0541 - val_loss: 1.0357
+Epoch 9/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0431 - val_loss: 1.0269
+Epoch 10/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0345 - val_loss: 1.0202
+estimated delay found: 0
+estimated_noise_found: 87.6847
+estimated_noise_std: 9.3640
+innovation mean: 56.4482803
+[KalmanNet] Epoch 1, Loss: 3869.3027
+innovation mean: 55.1212502
+[KalmanNet] Epoch 2, Loss: 3687.9583
+innovation mean: 53.8292847
+[KalmanNet] Epoch 3, Loss: 3515.6985
+innovation mean: 52.5719223
+[KalmanNet] Epoch 4, Loss: 3352.1211
+innovation mean: 51.3487206
+[KalmanNet] Epoch 5, Loss: 3196.8313
+innovation mean: 50.1593552
+[KalmanNet] Epoch 6, Loss: 3049.4646
+innovation mean: 49.0034981
+[KalmanNet] Epoch 7, Loss: 2909.6707
+innovation mean: 47.8806953
+[KalmanNet] Epoch 8, Loss: 2777.1011
+innovation mean: 46.7903175
+[KalmanNet] Epoch 9, Loss: 2651.4033
+innovation mean: 45.7316666
+[KalmanNet] Epoch 10, Loss: 2532.2305
+innovation mean: 44.7039566
+[KalmanNet] Epoch 11, Loss: 2419.2415
+innovation mean: 43.7063751
+[KalmanNet] Epoch 12, Loss: 2312.1079
+innovation mean: 42.7380943
+[KalmanNet] Epoch 13, Loss: 2210.5132
+innovation mean: 41.7982635
+[KalmanNet] Epoch 14, Loss: 2114.1565
+innovation mean: 40.8860588
+[KalmanNet] Epoch 15, Loss: 2022.7510
+innovation mean: 40.0006294
+[KalmanNet] Epoch 16, Loss: 1936.0227
+innovation mean: 39.1411476
+[KalmanNet] Epoch 17, Loss: 1853.7129
+innovation mean: 38.3067665
+[KalmanNet] Epoch 18, Loss: 1775.5735
+innovation mean: 37.4966583
+[KalmanNet] Epoch 19, Loss: 1701.3710
+innovation mean: 36.7100067
+[KalmanNet] Epoch 20, Loss: 1630.8821
+innovation mean: 35.9459801
+[KalmanNet] Epoch 21, Loss: 1563.8951
+innovation mean: 35.2037468
+[KalmanNet] Epoch 22, Loss: 1500.2103
+innovation mean: 34.4825
+[KalmanNet] Epoch 23, Loss: 1439.6375
+innovation mean: 33.7814178
+[KalmanNet] Epoch 24, Loss: 1381.9974
+innovation mean: 33.0997505
+[KalmanNet] Epoch 25, Loss: 1327.1221
+innovation mean: 32.4367065
+[KalmanNet] Epoch 26, Loss: 1274.8507
+innovation mean: 31.7915554
+[KalmanNet] Epoch 27, Loss: 1225.0342
+innovation mean: 31.1635571
+[KalmanNet] Epoch 28, Loss: 1177.5303
+innovation mean: 30.5520287
+[KalmanNet] Epoch 29, Loss: 1132.2073
+innovation mean: 29.9562702
+[KalmanNet] Epoch 30, Loss: 1088.9399
+innovation mean: 29.375639
+[KalmanNet] Epoch 31, Loss: 1047.6117
+innovation mean: 28.8094959
+[KalmanNet] Epoch 32, Loss: 1008.1125
+innovation mean: 28.2572365
+[KalmanNet] Epoch 33, Loss: 970.3400
+innovation mean: 27.7182713
+[KalmanNet] Epoch 34, Loss: 934.1974
+innovation mean: 27.1920452
+[KalmanNet] Epoch 35, Loss: 899.5951
+innovation mean: 26.6780224
+[KalmanNet] Epoch 36, Loss: 866.4484
+innovation mean: 26.1756973
+[KalmanNet] Epoch 37, Loss: 834.6783
+innovation mean: 25.6845722
+[KalmanNet] Epoch 38, Loss: 804.2110
+innovation mean: 25.2043495
+[KalmanNet] Epoch 39, Loss: 774.9765
+innovation mean: 24.734478
+[KalmanNet] Epoch 40, Loss: 746.9106
+innovation mean: 24.2744694
+[KalmanNet] Epoch 41, Loss: 719.9523
+innovation mean: 23.823925
+[KalmanNet] Epoch 42, Loss: 694.0449
+innovation mean: 23.3824539
+[KalmanNet] Epoch 43, Loss: 669.1351
+innovation mean: 22.9497013
+[KalmanNet] Epoch 44, Loss: 645.1730
+innovation mean: 22.5253162
+[KalmanNet] Epoch 45, Loss: 622.1121
+innovation mean: 22.1089611
+[KalmanNet] Epoch 46, Loss: 599.9080
+innovation mean: 21.7003784
+[KalmanNet] Epoch 47, Loss: 578.5201
+innovation mean: 21.2992821
+[KalmanNet] Epoch 48, Loss: 557.9099
+innovation mean: 20.9053307
+[KalmanNet] Epoch 49, Loss: 538.0410
+innovation mean: 20.518259
+[KalmanNet] Epoch 50, Loss: 518.8795
+RMSE (observed vs true): 9.8750
+RMSE (denoised vs true): 1.9534
+RMSE (KalmanNet vs true): 24.4408
+
+
+2nd run >>> KNET with MG .. increasing training samples
+
+this result is good to save >> 
+
+True delay: 5
+Noise std: 10.0
+Train size: 6790, Val size: 1455, Test size: 1455
+E0000 00:00:1777293769.153557   19767 cuda_platform.cc:52] failed call to cuInit: INTERNAL: CUDA error: Failed call to cuInit: UNKNOWN ERROR (303)
+Epoch 1/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 71s 108ms/step - loss: 1.0177 - val_loss: 1.0048
+Epoch 2/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 4s 33ms/step - loss: 1.0118 - val_loss: 1.0019
+Epoch 3/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 4s 33ms/step - loss: 1.0084 - val_loss: 1.0001
+Epoch 4/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 4s 33ms/step - loss: 1.0065 - val_loss: 0.9985
+Epoch 5/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0052 - val_loss: 0.9975
+Epoch 6/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 31ms/step - loss: 1.0044 - val_loss: 0.9970
+Epoch 7/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0038 - val_loss: 0.9969
+Epoch 8/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0034 - val_loss: 0.9963
+Epoch 9/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0031 - val_loss: 0.9962
+Epoch 10/10
+107/107 ━━━━━━━━━━━━━━━━━━━━ 3s 32ms/step - loss: 1.0028 - val_loss: 0.9961
+estimated delay found: 0
+estimated_noise_found: 98.5185
+estimated_noise_std: 9.9256
+innovation mean: 0.812372565
+[KalmanNet] Epoch 1, Loss: 1.0513
+innovation mean: 0.81225127
+[KalmanNet] Epoch 2, Loss: 1.0510
+innovation mean: 0.812125683
+[KalmanNet] Epoch 3, Loss: 1.0507
+innovation mean: 0.811995745
+[KalmanNet] Epoch 4, Loss: 1.0504
+innovation mean: 0.811861277
+[KalmanNet] Epoch 5, Loss: 1.0500
+innovation mean: 0.811724603
+[KalmanNet] Epoch 6, Loss: 1.0497
+innovation mean: 0.811584592
+[KalmanNet] Epoch 7, Loss: 1.0494
+innovation mean: 0.811441779
+[KalmanNet] Epoch 8, Loss: 1.0490
+innovation mean: 0.811295629
+[KalmanNet] Epoch 9, Loss: 1.0486
+innovation mean: 0.811144888
+[KalmanNet] Epoch 10, Loss: 1.0482
+innovation mean: 0.810988665
+[KalmanNet] Epoch 11, Loss: 1.0479
+innovation mean: 0.810826659
+[KalmanNet] Epoch 12, Loss: 1.0474
+innovation mean: 0.810659051
+[KalmanNet] Epoch 13, Loss: 1.0470
+innovation mean: 0.81049031
+[KalmanNet] Epoch 14, Loss: 1.0466
+innovation mean: 0.810315132
+[KalmanNet] Epoch 15, Loss: 1.0462
+innovation mean: 0.810133278
+[KalmanNet] Epoch 16, Loss: 1.0457
+innovation mean: 0.80994457
+[KalmanNet] Epoch 17, Loss: 1.0452
+innovation mean: 0.80974865
+[KalmanNet] Epoch 18, Loss: 1.0447
+innovation mean: 0.809546888
+[KalmanNet] Epoch 19, Loss: 1.0442
+innovation mean: 0.80933708
+[KalmanNet] Epoch 20, Loss: 1.0437
+innovation mean: 0.809119046
+[KalmanNet] Epoch 21, Loss: 1.0432
+innovation mean: 0.80889219
+[KalmanNet] Epoch 22, Loss: 1.0426
+innovation mean: 0.808656275
+[KalmanNet] Epoch 23, Loss: 1.0421
+innovation mean: 0.808412135
+[KalmanNet] Epoch 24, Loss: 1.0415
+innovation mean: 0.808158457
+[KalmanNet] Epoch 25, Loss: 1.0409
+innovation mean: 0.807895303
+[KalmanNet] Epoch 26, Loss: 1.0403
+innovation mean: 0.807631493
+[KalmanNet] Epoch 27, Loss: 1.0396
+innovation mean: 0.807361186
+[KalmanNet] Epoch 28, Loss: 1.0390
+innovation mean: 0.807079732
+[KalmanNet] Epoch 29, Loss: 1.0383
+innovation mean: 0.806787372
+[KalmanNet] Epoch 30, Loss: 1.0376
+innovation mean: 0.806487799
+[KalmanNet] Epoch 31, Loss: 1.0369
+innovation mean: 0.806175411
+[KalmanNet] Epoch 32, Loss: 1.0362
+innovation mean: 0.80584985
+[KalmanNet] Epoch 33, Loss: 1.0354
+innovation mean: 0.805514336
+[KalmanNet] Epoch 34, Loss: 1.0346
+innovation mean: 0.805164933
+[KalmanNet] Epoch 35, Loss: 1.0338
+innovation mean: 0.804809213
+[KalmanNet] Epoch 36, Loss: 1.0330
+innovation mean: 0.804452538
+[KalmanNet] Epoch 37, Loss: 1.0322
+innovation mean: 0.804088354
+[KalmanNet] Epoch 38, Loss: 1.0313
+innovation mean: 0.803709447
+[KalmanNet] Epoch 39, Loss: 1.0304
+innovation mean: 0.803314328
+[KalmanNet] Epoch 40, Loss: 1.0295
+innovation mean: 0.802911878
+[KalmanNet] Epoch 41, Loss: 1.0286
+innovation mean: 0.802493751
+[KalmanNet] Epoch 42, Loss: 1.0277
+innovation mean: 0.802058399
+[KalmanNet] Epoch 43, Loss: 1.0267
+innovation mean: 0.801613748
+[KalmanNet] Epoch 44, Loss: 1.0258
+innovation mean: 0.801156878
+[KalmanNet] Epoch 45, Loss: 1.0248
+innovation mean: 0.800700426
+[KalmanNet] Epoch 46, Loss: 1.0238
+innovation mean: 0.800241888
+[KalmanNet] Epoch 47, Loss: 1.0228
+innovation mean: 0.799785793
+[KalmanNet] Epoch 48, Loss: 1.0218
+innovation mean: 0.799328268
+[KalmanNet] Epoch 49, Loss: 1.0208
+innovation mean: 0.798862815
+[KalmanNet] Epoch 50, Loss: 1.0198
+RMSE (observed vs true): 9.8750
+RMSE (denoised vs true): 0.3905
+RMSE (KalmanNet vs true): 1.0795
+
+
+
+======================= Jena Climate GRU Baseline Result =======================
+
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Epoch 1/10
+55/55 [==============================] - 3s 27ms/step - loss: 0.2302 - val_loss: 0.0036
+Epoch 2/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0118 - val_loss: 0.0036
+Epoch 3/10
+55/55 [==============================] - 1s 22ms/step - loss: 0.0097 - val_loss: 0.0029
+Epoch 4/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0082 - val_loss: 0.0027
+Epoch 5/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0069 - val_loss: 0.0022
+Epoch 6/10
+55/55 [==============================] - 1s 20ms/step - loss: 0.0059 - val_loss: 0.0019
+Epoch 7/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0052 - val_loss: 0.0015
+Epoch 8/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0045 - val_loss: 0.0012
+Epoch 9/10
+55/55 [==============================] - 1s 21ms/step - loss: 0.0042 - val_loss: 0.0011
+Epoch 10/10
+55/55 [==============================] - 1s 20ms/step - loss: 0.0039 - val_loss: 9.8496e-04
+Masked RMSE (test only): 0.2780

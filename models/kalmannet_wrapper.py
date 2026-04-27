@@ -68,13 +68,20 @@ class KalmanNetWrapper(tf.keras.Model):
             K_t = tf.tanh(self.fc(gru_out))
             K_t = tf.squeeze(K_t, axis=1)
 
+            # -------- Numerical stabilization --------
+            innovation = tf.clip_by_value(innovation, -5.0, 5.0)
+            K_t = tf.clip_by_value(K_t, -0.5, 0.5)
+            x_prior = tf.clip_by_value(x_prior, -10.0, 10.0)
+
             # -------- Update --------
             x_hat = x_prior + K_t * innovation
+
+            # final safety clamp
+            x_hat = tf.clip_by_value(x_hat, -10.0, 10.0)
 
             x_hat_list.append(x_hat)
             x_prev = x_hat
 
-            # optional debug safety
             tf.debugging.check_numerics(x_hat, "NaN in x_hat")
 
         x_hat_seq = tf.stack(x_hat_list, axis=1)
