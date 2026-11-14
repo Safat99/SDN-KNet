@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import matplotlib.pyplot as plt
 from data.generators.mackey_glass import MackeyGlassGenerator
 
@@ -18,14 +20,16 @@ def validate_mg():
     plt.xlabel("Time")
     plt.ylabel("x(t)")
     # plt.show()
-    plt.savefig('mg_frst_500_steps.png')
+    figure_dir = Path("results/figures/mackey_glass")
+    figure_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(figure_dir / 'mg_frst_500_steps.png')
 
     # Plot full signal (compressed)
     plt.figure(figsize=(10, 4))
     plt.plot(x)
     plt.title("Full Mackey-Glass Signal")
     # plt.show()
-    plt.savefig('full_signal_mg.jpg')
+    plt.savefig(figure_dir / 'full_signal_mg.jpg')
 
 
 if __name__ == "__main__":

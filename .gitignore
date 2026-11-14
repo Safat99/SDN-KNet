@@ -3,5 +3,25 @@ __pycache__/
 *.py[cod]
 *$py.class
 reports/
-results/
+/results/*
+!/results/figures/
 slurm_logs/
+
+# Local environments, caches, and editor files
+.venv/
+env/
+ENV/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+*.egg-info/
+build/
+dist/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

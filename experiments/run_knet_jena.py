@@ -244,7 +244,7 @@ def main():
 
     saver.save_history({"knet_loss": knet_losses}, exp_name)
 
-    plotter = Plotter("results/jena_knet/plots")
+    plotter = Plotter("results/figures/jena_climate/knet")
 
     plotter.plot_predictions(true_test, pred_test, name=exp_name)
 

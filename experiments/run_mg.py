@@ -125,7 +125,7 @@ def main():
     saver.save_metrics(metrics, exp_name)
 
     # ---------------- PLOTTING ----------------
-    plotter = Plotter()
+    plotter = Plotter("results/figures/mackey_glass")
 
     plotter.plot_training(trainer.history, name=exp_name)
     plotter.plot_predictions(Y_test, preds, name=exp_name)

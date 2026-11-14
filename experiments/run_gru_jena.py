@@ -102,14 +102,11 @@ def main():
         "model": "gru"
     }, exp_name)
 
-    plotter = Plotter()
-    
-    plot_dir = "results/jena/gru/plots"
-    os.makedirs(plot_dir, exist_ok=True)
+    plotter = Plotter("results/figures/jena_climate/gru")
 
     saver.save_history(trainer.history, exp_name)
-    plotter.plot_training(trainer.history, name=f"{plot_dir}/{exp_name}")
-    plotter.plot_predictions(Y_test, preds, name=f"{plot_dir}/{exp_name}")
+    plotter.plot_training(trainer.history, name=exp_name)
+    plotter.plot_predictions(Y_test, preds, name=exp_name)
 
     plotter.plot_full_comparison(
         x_norm[-len(preds):],

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -377,7 +379,9 @@ def main():
     plt.grid(True)
 
     # plt.show()
-    plt.savefig('non_linear_v2_knet.png')
+    figure_dir = Path("results/figures/jena_climate")
+    figure_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(figure_dir / 'non_linear_v2_knet.png')
 
 
 if __name__ == "__main__":

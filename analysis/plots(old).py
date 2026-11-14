@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 
 class OldPlotter:
-    def __init__(self, base_dir="reports/figures"):
+    def __init__(self, base_dir="results/figures"):
         self.base_dir = base_dir
         os.makedirs(self.base_dir, exist_ok=True)
         

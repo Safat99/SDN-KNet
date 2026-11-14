@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -330,7 +332,9 @@ def main():
     plt.grid(True)
 
     # plt.show()
-    plt.savefig('knet_after_training_on_linear_model.png')
+    figure_dir = Path("results/figures/linear")
+    figure_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(figure_dir / 'knet_after_training_on_linear_model.png')
 
 
 if __name__ == "__main__":

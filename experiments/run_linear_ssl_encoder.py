@@ -106,12 +106,12 @@ def main():
     # saver.save_metrics(metrics, exp_name)
 
     # # optional plot
-    # plotter = Plotter("reports/figures/self-supervised-settings")
+    # plotter = Plotter("results/figures/linear/self-supervised-settings")
     # plotter.plot_training(trainer.history, name=exp_name)
     # plotter.plot_predictions(y_true, y_hat, name=exp_name)
 
     # # residual plot
-    # fig_dir = "reports/figures"
+    # fig_dir = "results/figures/linear"
     # os.makedirs(fig_dir, exist_ok=True)
 
     # plt.figure(figsize=(10, 4))

@@ -53,7 +53,7 @@ def main():
     exp_name = f"sdn_knet_mg_d{args.delay}_n{args.noise}_s{args.seed}"
 
     saver = ResultSaver(base_dir="results/mg_sdn_knet/data")
-    plotter = Plotter()
+    plotter = Plotter("results/figures/mackey_glass/knet")
 
     # ---------------- PIPELINE SSL ----------------
     pipeline = TimeSeriesPipeline(config)
@@ -211,7 +211,7 @@ def main():
     )
 
     # ---------------- PLOTS ----------------
-    plotter = Plotter("results/mg_sdn_knet/plots")
+    plotter = Plotter("results/figures/mackey_glass/knet")
 
     plotter.plot_predictions(y_eval, x_hat, name=exp_name)
 

@@ -126,7 +126,7 @@ def main():
     saver.save_predictions(x_true=Y_test, x_hat=preds, y_observed=y_norm[-len(preds):], name=exp_name)
     saver.save_metrics(metrics, exp_name)
 
-    plotter = Plotter()
+    plotter = Plotter("results/figures/linear")
 
     if trainer is not None:
         saver.save_history(trainer.history, exp_name)

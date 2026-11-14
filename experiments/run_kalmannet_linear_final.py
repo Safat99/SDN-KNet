@@ -42,7 +42,7 @@ def main():
     exp_name = f"knet_linear_d{args.delay}_n{args.noise}_s{args.seed}"
 
     saver = ResultSaver("results/kalmannet")
-    plotter = Plotter("reports/figures/kalmannet")
+    plotter = Plotter("results/figures/linear/kalmannet")
 
     # ---------------- SEED ----------------
     np.random.seed(args.seed)

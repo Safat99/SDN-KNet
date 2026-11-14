@@ -3,6 +3,6 @@ matplotlib
 tensorflow
 PyYAML
 pykalman
-.codex
 optuna
 scipy
+pandas

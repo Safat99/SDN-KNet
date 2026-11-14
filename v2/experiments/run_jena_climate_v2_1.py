@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import numpy as np
 import matplotlib.pyplot as plt
 import tensorflow as tf
@@ -225,7 +227,9 @@ def main():
     plt.legend()
     plt.title("Jena Climate Estimation")
     plt.grid(True)
-    plt.savefig('jena_climate_estimation.png')
+    figure_dir = Path("results/figures/jena_climate")
+    figure_dir.mkdir(parents=True, exist_ok=True)
+    plt.savefig(figure_dir / 'jena_climate_estimation.png')
 
 
 if __name__ == "__main__":
