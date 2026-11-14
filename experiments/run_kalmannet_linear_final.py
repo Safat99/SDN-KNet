@@ -121,7 +121,7 @@ def main():
     y_input = y_aligned.astype(np.float32)[..., np.newaxis]
     y_input = y_input[np.newaxis, ...]
 
-    # 🔥 MEMORY CONTROL
+    # MEMORY CONTROL
     max_knet_steps = min(2000, y_input.shape[1])
     y_input = y_input[:, :max_knet_steps, :]
     y_aligned = y_aligned[:max_knet_steps]
@@ -143,7 +143,7 @@ def main():
             y_prior_seq = tf.squeeze(y_prior_seq, axis=0)
             y_prior_seq = tf.squeeze(y_prior_seq, axis=-1)
 
-            loss = tf.reduce_mean(tf.square(y_aligned_tf - y_prior_seq))
+            loss = tf.reduce_mean(tf.square(y_aligned_tf - y_prior_seq)) + 1e-3 * tf.add_n([tf.nn.l2_loss(w) for w in kalmannet.trainable_variables])
 
         grads = tape.gradient(loss, knet.trainable_variables)
         grads = [tf.clip_by_norm(g, 1.0) if g is not None else None for g in grads]

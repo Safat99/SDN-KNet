@@ -68,7 +68,7 @@ def main():
     trainer.train((X_train, Y_train), (X_val, Y_val))
 
     # ---------------- TEST RESIDUAL ----------------
-    y_hat_test = model(X_test, training=False).numpy().squeeze()
+    y_hat_test = model(X_test, training=False).numpy().squeeze() # y_hat on test data 
     y_true_test = Y_test.squeeze()
     residual_test = y_true_test - y_hat_test
     
